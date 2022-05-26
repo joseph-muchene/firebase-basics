@@ -1,0 +1,15 @@
+document.getElementById("btn").addEventListener("click", function () {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  let error = document.getElementById("error");
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((data) => {
+      window.location.href = "login.html";
+    })
+    .catch((err) => {
+      error.innerText = err.message;
+    });
+});
