@@ -7,7 +7,22 @@ document.getElementById("btn").addEventListener("click", function () {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((data) => {
-      window.location.href = "login.html";
+      // generate a collection called users
+
+      let userId = data.user.uid;
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(userId)
+        .set({
+          userEmail: email,
+          userName: name,
+          userId: data.user.uid,
+        })
+        .then(() => {
+          // redirect the user
+          window.location.href = "login.html";
+        });
     })
     .catch((err) => {
       error.innerText = err.message;

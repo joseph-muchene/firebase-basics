@@ -8,8 +8,8 @@ document.getElementById("btn").onclick = function () {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      alert("login was successful for email " + user.email);
-      // ...
+      // alert("login was successful for email " + user.email);
+      window.location.href = "dashboard.html";
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -22,8 +22,12 @@ document.getElementById("btn").onclick = function () {
 //  This observer gets called whenever the user's sign-in state changes.
 
 firebase.auth().onAuthStateChanged((user) => {
-    console.log(user);
+  console.log(user);
   if (user) {
+    console.log(user);
+    document.getElementById("welcome").innerText = `welcome ${user.email}`;
+
+    // redirect to dashboard
     document.getElementById("info").innerText = user.email;
   } else {
     console.log("user is signed out");
